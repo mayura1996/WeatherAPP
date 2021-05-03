@@ -6,9 +6,10 @@ import WeatherInfo from './components/WeatherInfo'
 import UnitsPicker from './components/UnitsPicker'
 import {colors} from './utils/index'
 import ReloadIcon from './components/ReloadIcon'
+import WeatherDetails from './components/WeatherDetails'
+import {WEATHER_API_KEY} from 'react-native-dotenv'
 
 
-const WEATHER_API_KEY = '45e9292ce7650f91dee4f30b642c87df'
 const BASE_WEATHER_URL = 'https://api.openweathermap.org/data/2.5/weather?'
 
 export default function App() {
@@ -63,8 +64,9 @@ export default function App() {
           <UnitsPicker uniitsSystem={uniitsSystem} setUnitySystem={setUnitySystem}/>
           <ReloadIcon load={load}/>
         <WeatherInfo currentWeather={currentWeather}/>
-
         </View>
+
+        <WeatherDetails currentWeather={currentWeather} uniitsSystem={uniitsSystem}/>
    
       </View>
     );
@@ -72,6 +74,8 @@ export default function App() {
 else if(errorMessage){
   return (
     <View style={styles.container}>
+                <ReloadIcon load={load}/>
+
       <Text>{errorMessage}</Text>
       <StatusBar style="auto" />
     </View>
